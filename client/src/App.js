@@ -4,6 +4,7 @@ import Layout from "./component/layout/SemanticUIexample_Layout";
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 import {Security,SecureRoute,ImplicitCallback} from "@okta/okta-react/";
 import Myprofile from "./component/Pages/Myprofile";
+import Group from "./component/Pages/Group";
 // import LoginPage from "./component/auth/OKTALoginPage";
 
 // function onAuthRequired({ history}) {
@@ -30,6 +31,7 @@ class App extends Component {
                                 <Route path='/implicit/callback' component={ImplicitCallback}/>
                                 {/*use okta loginPage to secure component*/}
                                 <SecureRoute path="/myprofile" component={Myprofile}/>
+                                <SecureRoute path="/group" component={Group}/>
                                 {/*OKTA customer loginPage*/}
                                 {/*<Route*/}
                                     {/*path="/login"*/}
