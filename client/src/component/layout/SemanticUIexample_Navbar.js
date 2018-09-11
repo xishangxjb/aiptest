@@ -2,18 +2,44 @@ import {Component} from "react";
 import {Button, Container, Menu, Responsive, Segment, Visibility} from "semantic-ui-react";
 import PropTypes from "prop-types";
 import React from "react";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { withAuth } from '@okta/okta-react';
 
 /*
 * Neither Semantic UI nor Semantic UI React offer a responsive navbar
 * */
 class DesktopContainer extends Component {
-    state = {activeItem: 'home'}
+    state = {activeItem: 'home',
+             authenticated: null
+    }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
+
+    checkAuthentication = async() => {
+        const authenticated = await this.props.auth.isAuthenticated();
+        if (authenticated !== this.state.authenticated) {
+            this.setState({ authenticated });
+        }
+    }
+
+    async componentDidMount() {
+        this.checkAuthentication();
+    }
+
+    async componentDidUpdate() {
+        this.checkAuthentication();
+    }
+
+    login = async() => {
+        this.props.auth.login('/');
+    }
+
+    logout = async() => {
+        this.props.auth.logout('/');
+    }
 
     render() {
         const { children } = this.props
@@ -71,11 +97,15 @@ class DesktopContainer extends Component {
                                     Group
                                 </Menu.Item>
                                 <Menu.Item position='right'>
-                                    <Button as={Link} to='/login' inverted={!fixed}>
-                                        Log in
-                                    </Button>
+                                    {
+                                        this.state.authenticated ?( <Button onClick={this.logout} inverted={!fixed}>
+                                            Logout
+                                        </Button>):( <Button onClick={this.login} inverted={!fixed}>
+                                            Log in
+                                        </Button>)
+                                    }
                                     <Button as={Link} to='/myprofile' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                                        MyProfie
+                                        MyProfile
                                     </Button>
                                 </Menu.Item>
                             </Container>
@@ -94,4 +124,4 @@ DesktopContainer.propTypes = {
 }
 
 
-export default DesktopContainer;
+export default withAuth(DesktopContainer);

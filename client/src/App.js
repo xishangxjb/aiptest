@@ -4,11 +4,11 @@ import Layout from "./component/layout/SemanticUIexample_Layout";
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 import {Security,SecureRoute,ImplicitCallback} from "@okta/okta-react/";
 import Myprofile from "./component/Pages/Myprofile";
-import LoginPage from "./component/auth/OKTALoginPage";
+// import LoginPage from "./component/auth/OKTALoginPage";
 
-function onAuthRequired({ history}) {
-    history.push("/login");
-}
+// function onAuthRequired({ history}) {
+//     history.push("/login");
+// }
 class App extends Component {
     render() {
         return (
@@ -21,7 +21,7 @@ class App extends Component {
                     issuer="https://dev-783322.oktapreview.com/oauth2/default"
                     client_id="0oafzpuy0pvICjIhI0h7"
                     redirect_uri={window.location.origin + '/implicit/callback'}
-                    onAuthRequired={onAuthRequired}
+                    // onAuthRequired={onAuthRequired}
                 >
                     <div className="App">
                         <Layout>
@@ -30,9 +30,13 @@ class App extends Component {
                                 <Route path='/implicit/callback' component={ImplicitCallback}/>
                                 {/*use okta loginPage to secure component*/}
                                 <SecureRoute path="/myprofile" component={Myprofile}/>
-                                <Route path="/login" render={()=><LoginPage
-                                baseUrl='https://dev-783322.oktapreview.com/oauth2/default'/>} />
-
+                                {/*OKTA customer loginPage*/}
+                                {/*<Route*/}
+                                    {/*path="/login"*/}
+                                    {/*render={() => (*/}
+                                        {/*<LoginPage baseUrl="https://dev-783322.oktapreview.com" />*/}
+                                    {/*)}*/}
+                                {/*/>*/}
                             </Switch>
                         </Layout>
                     </div>
