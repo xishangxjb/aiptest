@@ -26,7 +26,7 @@ const HomepageHeading = ({ mobile }) => (
                 />
                 <Header
                     as='h2'
-                    content='Do you want to find group?'
+                    content='Do you want to use SOMERN_Project?'
                     inverted
                     style={{
                         fontSize: mobile ? '1.5em' : '1.7em',
