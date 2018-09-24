@@ -76,6 +76,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Error: bcrypt for windows10
 Open powershell with administrator privileges and run this command, then proceed with bcrypt installation
-* `npm install --global --production windows-build-tools
+* `npm install --global --production windows-build-tools`
 
 if you have the same problem with other system, visit [node.bcrypt.js](https://github.com/kelektiv/node.bcrypt.js/wiki/Installation-Instructions) github.
