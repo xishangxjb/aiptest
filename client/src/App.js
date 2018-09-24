@@ -6,6 +6,7 @@ import About from "./component/Pages/About";
 import Home from "./component/Pages/Home";
 import MapPage from "./component/Pages/Map";
 import Work from "./component/Pages/Work";
+import Group from "./component/Group/Group";
 import NotFound from "./component/Pages/NotFound";
 import Register from "./component/Auth/Register";
 import Signin from "./component/Auth/Signin";
@@ -82,9 +83,9 @@ class App extends React.Component{
                         <Route path="/work" component={Work}/>
                         <Route path="/map" component={MapPage}/>
                         <PrivateRoute path="/group" component={Group}/>
+                        <Route component={NotFound}/>
                         {/*<FadingRoute path="/group" component={Group}/>*/}
                         {/*<AuthRoute path="/group" component={Group} redirectTo="/login" authenticated={this.state.authenticated} />*/}
-                        <Route component={NotFound}/>
                         {/*<Route path="/group" render={() => <Group />}/>*/}
 
                     </Switch>

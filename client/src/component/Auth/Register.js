@@ -4,7 +4,7 @@ import {Button, Form, Grid, Image, Segment} from 'semantic-ui-react'
 
 import {
   getFromStorage,
-  setInStorage
+  // setInStorage
 } from "../../utils/storage";
 
 //style
