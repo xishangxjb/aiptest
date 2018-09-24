@@ -1,5 +1,18 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
+import {BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
+import Layout from "./component/Header/Layout";
+import About from "./component/Pages/About";
+import Home from "./component/Pages/Home";
+import MapPage from "./component/Pages/Map";
+import Work from "./component/Pages/Work";
+import NotFound from "./component/Pages/NotFound";
+import Register from "./component/Auth/Register";
+import Signin from "./component/Auth/Signin";
+import fakeAuth from "./component/Auth/fakeAuth";
+
+
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
