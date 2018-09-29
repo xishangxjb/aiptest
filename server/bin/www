@@ -8,6 +8,9 @@ var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
 
+//import socket
+const socket = require('socket.io');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -89,3 +92,27 @@ function onListening() {
   debug('Listening on ' + bind);
   console.log("Started listening on port",port);
 }
+
+
+// Set up socket.io
+const io = socket(server);
+let online = 0;
+
+io.on('connection', (socket) => {
+    online++;
+    console.log(`Socket ${socket.id} connected.`);
+    console.log(`Online: ${online}`);
+    io.emit('visitor enters', online);
+
+    socket.on('add', data => socket.broadcast.emit('add', data));
+    socket.on('update', data => socket.broadcast.emit('update', data));
+    socket.on('delete', data => socket.broadcast.emit('delete', data));
+
+    socket.on('disconnect', () => {
+        online--;
+        console.log(`Socket ${socket.id} disconnected.`);
+        console.log(`Online: ${online}`);
+        io.emit('visitor exits', online);
+    });
+});
+

@@ -11,6 +11,7 @@ import NotFound from "./component/Pages/NotFound";
 import Register from "./component/Auth/Register";
 import Signin from "./component/Auth/Signin";
 import fakeAuth from "./component/Auth/fakeAuth";
+import DataPage from "./component/Data/Data";
 
 
 
@@ -47,6 +48,7 @@ class App extends React.Component{
                         <Route path="/signup" component={Register}/>
                         <Route path="/work" component={Work}/>
                         <Route path="/map" component={MapPage}/>
+                        <Route path="/data" component={DataPage}/>
                         <PrivateRoute path="/group" component={Group}/>
                         <Route component={NotFound}/>
                     </Switch>
