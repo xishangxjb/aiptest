@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Container } from "semantic-ui-react";
 // import axios from 'axios';
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
 import DataTable from "./DataTable";
 import InputData from "./InputData";
 
 class Data extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.server = process.env.REACT_APP_API_URL || "";
-    this.socket = io.connect(this.server);
+    // this.socket = this.props.socket;
 
     this.state = {
       datas: [],
@@ -27,11 +27,12 @@ class Data extends Component {
   // Place socket.io code inside here
   componentDidMount() {
     this.fetchDatas();
-    this.socket.on("visitor enters", data => this.setState({ online: data }));
-    this.socket.on("visitor exits", data => this.setState({ online: data }));
-    this.socket.on("add", data => this.handleDataAdded(data));
-    this.socket.on("update", data => this.handleDataUpdated(data));
-    this.socket.on("delete", data => this.handleDataDeleted(data));
+    this.props.socket.on("visitor enters", data => this.setState({ online: data }));
+    this.props.socket.on("visitor exits", data => this.setState({ online: data }));
+    this.props.socket.on("add", data => this.handleDataAdded(data));
+    this.props.socket.on("update", data => this.handleDataUpdated(data));
+    this.props.socket.on("delete", data => this.handleDataDeleted(data));
+
   }
 
   // Fetch data from the back-end
@@ -95,7 +96,7 @@ class Data extends Component {
             buttonColor="green"
             onDataAdded={this.handleDataAdded}
             server={this.server}
-            socket={this.socket}
+            socket={this.props.socket}
           />
           <em id="online">{`${online} ${noun} ${verb} online.`}</em>
           <DataTable
@@ -103,7 +104,7 @@ class Data extends Component {
             onDataDeleted={this.handleDataDeleted}
             datas={this.state.datas}
             server={this.server}
-            socket={this.socket}
+            socket={this.props.socket}
           />
         </Container>
         <br />

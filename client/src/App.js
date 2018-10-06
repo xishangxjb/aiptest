@@ -15,7 +15,7 @@ import Register from "./component/Auth/Register";
 import Signin from "./component/Auth/Signin";
 import fakeAuth from "./component/Auth/fakeAuth";
 import DataPage from "./component/Data/Data";
-
+import io from "socket.io-client";
 import "./App.css";
 import {getFromStorage} from "./utils/storage";
 
@@ -38,6 +38,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            socket:io.connect(process.env.REACT_APP_API_URL || "")
+        }
+    }
+
+
   render() {
       {
           const object = getFromStorage("the_main_app");
@@ -54,7 +62,10 @@ class App extends React.Component {
             <Route path="/login" component={Signin} />
             <Route path="/signup" component={Register} />
             <Route path="/map" component={MapPage} />
-            <Route path="/data" component={DataPage} />
+            {/*<Route*/}
+                {/*path="/data" redner={() =>  <h3>hi</h3>}*/}
+            {/*/>*/}
+            <Route path="/data" render={() => <DataPage socket={this.state.socket}/>}/>
             <PrivateRoute path="/group" component={Group} />
             <Route component={NotFound} />
           </Switch>
