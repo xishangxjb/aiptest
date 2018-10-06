@@ -17,6 +17,7 @@ import fakeAuth from "./component/Auth/fakeAuth";
 import DataPage from "./component/Data/Data";
 
 import "./App.css";
+import {getFromStorage} from "./utils/storage";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -38,6 +39,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 class App extends React.Component {
   render() {
+      {
+          const object = getFromStorage("the_main_app");
+          if (object && object.token) {
+              fakeAuth.authenticate();
+          }
+      }
     return (
       <Router>
         <Layout>

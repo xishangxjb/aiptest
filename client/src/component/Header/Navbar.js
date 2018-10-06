@@ -76,7 +76,7 @@ class DesktopContainer extends Component {
                   active={activeItem === "work"}
                   onClick={this.handleItemClick}
                   as={Link}
-                  to="/work"
+                  to="/data"
                 >
                   Work
                 </Menu.Item>

@@ -126,7 +126,6 @@ class LoginPage extends React.Component {
     const { from } = this.props.location.state || { from: { pathname: "/" } };
 
     if (isLoading) {
-      console.log(from);
       return (
         <div>
           <p>Loading.....</p>
