@@ -27,7 +27,7 @@ class LoginPage extends React.Component {
       signInError: "",
       signInEmail: "",
       signInPassword: "",
-      formClassName: "",
+      formClassName: ""
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -44,7 +44,6 @@ class LoginPage extends React.Component {
         .then(res => res.json())
         .then(json => {
           if (json.success) {
-
             this.setState({
               token,
               isLoading: false
@@ -56,7 +55,6 @@ class LoginPage extends React.Component {
           }
         });
     } else {
-
       this.setState({
         isLoading: false
       });
