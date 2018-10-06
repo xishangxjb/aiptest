@@ -7,6 +7,17 @@ import { Message, Button, Form, Select } from 'semantic-ui-react';
 //   { key: 'f', text: 'Female', value: 'f' },
 //   { key: 'o', text: 'Do Not Disclose', value: 'o' }
 // ]
+const planeClass=[{text:'A',value:'A',},{text:'B',value:'B',},{text:'C',value:'C'},{text:'D', value:'D'},{text:'E',value:'E'},];
+const planeModel=[{text:'A330-203',value:'A330-203'},{text:'A320-232',value:'A320-232'},{text:'A320-242',value:'A320-242'},
+    {text:'A737-3B7',value:'A737-3B7'},{text:'B737-3B7',value:'B737-3B7'},{text:'B737-476',value:'B737-476'},{text:'B717-200',value:'B717-200'}]
+const city= [{text:'Adelaide',value:'Adelaide'}, {text:'Alice Springs',value:'Alice Springs'},{text:'Albany',value:'Albany'},{text:'Broken Hill',value:'Broken Hill'},
+    {text:'Broome',value:'Broome'},{text:'Brisbane',value:'Brisbane'},{text:'Bendigo',value:'Bendigo'},{text:'Canberra',value:'Canberra'},{text:'Cairns',value:'Cairns'},
+    {text:'Darwin',value:'Darwin'},{text:'Hobart',value:'Hobart'},{text:'Kalgoorlie',value:'Kalgoorlie'},{text:'Launceston',value:'Launceston'}
+    ,{text:'Melbourne',value:'Melbourne'},{text:'Mt Isa',value:'Mt Isa'},{text:'Newcastle',value:'Newcastle'},{text:'Perth',value:'Perth'},
+    {text:'Pt Augusta',value:'Pt Augusta'},{text:'Rockhampton',value:'Rockhampton'},{text:'Sydney',value:'Sydney'},{text:'London',value:'London'}];
+const engine=[{text:'CF6-80E142',value:'CF6-80E142'},{text:'CFM56-3B1',value:'CFM56-3B1'},{text:'CFM-56-3',value:'CFM-56-3'},
+    {text:'V2527-5A',value:'V2527-5A'},{text:'772B-60',value:'772B-60'}];
+
 
 class InputDataForm extends Component {
 
@@ -26,7 +37,7 @@ class InputDataForm extends Component {
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleSelectChange = this.handleSelectChange.bind(this);
+      //  this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleInputPrice=this.handleInputPrice.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -67,8 +78,31 @@ class InputDataForm extends Component {
     }
 
     // handleSelectChange(e, data) {
-    //   this.setState({ gender: data.value });
+    //     const target = e.target;
+    //     const name=target.name;
+    //   this.setState({[name]: data.value });
     // }
+
+    handleSelectAirSpaceClass = (e,data) =>{
+        this.setState({AirSpaceClass:data.value});
+    }
+
+    handleSelectFromCity=(e,data) =>{
+        this.setState({From_City:data.value})
+    }
+
+    handleSelectToCity=(e,data) =>{
+        this.setState({To_City:data.value})
+    }
+
+    handleSelectAircraftModel=(e,data)=>{
+        this.setState({AircraftModel:data.value})
+    }
+    handleSelectEngine=(e,data)=>{
+        this.setState({EngineModel:data.value})
+    }
+
+
 
     handleSubmit(e) {
         // Prevent browser refresh
@@ -141,16 +175,7 @@ class InputDataForm extends Component {
         const formClassName = this.state.formClassName;
         const formSuccessMessage = this.state.formSuccessMessage;
         const formErrorMessage = this.state.formErrorMessage;
-        const planeClass=[{text:'A',value:'A',},{text:'B',value:'B',},{text:'C',value:'C'},{text:'D', value:'D'},{text:'E',value:'E'},];
-        const planeModel=[{text:'A330-203',value:'A330-203'},{text:'A320-232',value:'A320-232'},{text:'A320-242',value:'A320-242'},
-            {text:'A737-3B7',value:'A737-3B7'},{text:'B737-3B7',value:'B737-3B7'},{text:'B737-476',value:'B737-476'},{text:'B717-200',value:'B717-200'}]
-        const city= [{text:'Adelaide',value:'Adelaide'}, {text:'Alice Springs',value:'Alice Springs'},{text:'Albany',value:'Albany'},{text:'Broken Hill',value:'Broken Hill'},
-            {text:'Broome',value:'Broome'},{text:'Brisbane',value:'Brisbane'},{text:'Bendigo',value:'Bendigo'},{text:'Canberra',value:'Canberra'},{text:'Cairns',value:'Cairns'},
-            {text:'Darwin',value:'Darwin'},{text:'Hobart',value:'Hobart'},{text:'Kalgoorlie',value:'Kalgoorlie'},{text:'Launceston',value:'Launceston'}
-            ,{text:'Melbourne',value:'Melbourne'},{text:'Mt Isa',value:'Mt Isa'},{text:'Newcastle',value:'Newcastle'},{text:'Perth',value:'Perth'},
-            {text:'Pt Augusta',value:'Pt Augusta'},{text:'Rockhampton',value:'Rockhampton'},{text:'Sydney',value:'Sydney'},{text:'London',value:'London'}];
-        const engine=[{text:'CF6-80E142',value:'CF6-80E142'},{text:'CFM56-3B1',value:'CFM56-3B1'},{text:'CFM-56-3',value:'CFM-56-3'},
-            {text:'V2527-5A',value:'V2527-5A'},{text:'772B-60',value:'772B-60'}];
+
         return (
             <Form className={formClassName} onSubmit={this.handleSubmit}>
                 <Form.Input
@@ -162,7 +187,7 @@ class InputDataForm extends Component {
                     name='AirSpaceClass'
                     maxLength='40'
                     value={this.state.AirSpaceClass}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleSelectAirSpaceClass}
                 />
                 <Form.Input
                     control={Select}
@@ -173,7 +198,7 @@ class InputDataForm extends Component {
                     name='From_City'
                     maxLength='40'
                     value={this.state.From_City}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleSelectFromCity}
                 />
                 <Form.Group widths='equal'>
                     <Form.Input
@@ -184,7 +209,7 @@ class InputDataForm extends Component {
                         placeholder='London'
                         name='To_City'
                         value={this.state.To_City}
-                        onChange={this.handleInputChange}
+                        onChange={this.handleSelectToCity}
                     />
                     {/*<Form.Field*/}
                     <Form.Input
@@ -207,7 +232,7 @@ class InputDataForm extends Component {
                     name='AircraftModel'
                     maxLength='40'
                     value={this.state.AircraftModel}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleSelectAircraftModel}
                 />
                 <Form.Input
                     control={Select}
@@ -217,7 +242,7 @@ class InputDataForm extends Component {
                     placeholder='CFM56-3B1'
                     name='EngineModel'
                     value={this.state.EngineModel}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleSelectEngine}
                 />
                 <Message
                     success
