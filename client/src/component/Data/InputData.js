@@ -5,29 +5,29 @@ import InputDataForm from './InputDataForm';
 
 class InputData extends Component {
 
-  render() {
-    return (
-      <Modal
-        trigger={<Button color={this.props.buttonColor}>{this.props.buttonTriggerTitle}</Button>}
-        dimmer='inverted'
-        size='tiny'
-        closeIcon='close'
-      >
-        <Modal.Header>{this.props.headerTitle}</Modal.Header>
-        <Modal.Content>
-          <InputDataForm
-            buttonSubmitTitle={this.props.buttonSubmitTitle}
-            buttonColor={this.props.buttonColor}
-            userID={this.props.userID}
-            onUserAdded={this.props.onUserAdded}
-            onUserUpdated={this.props.onUserUpdated}
-            server={this.props.server}
-            socket={this.props.socket}
-          />
-        </Modal.Content>
-      </Modal>
-    );
-  }
+    render() {
+        return (
+            <Modal
+                trigger={<Button color={this.props.buttonColor}>{this.props.buttonTriggerTitle}</Button>}
+                dimmer='inverted'
+                size='tiny'
+                closeIcon='close'
+            >
+                <Modal.Header>{this.props.headerTitle}</Modal.Header>
+                <Modal.Content>
+                    <InputDataForm
+                        buttonSubmitTitle={this.props.buttonSubmitTitle}
+                        buttonColor={this.props.buttonColor}
+                        dataID={this.props.dataID}
+                        onDataAdded={this.props.onDataAdded}
+                        onDataUpdated={this.props.onDataUpdated}
+                        server={this.props.server}
+                        socket={this.props.socket}
+                    />
+                </Modal.Content>
+            </Modal>
+        );
+    }
 }
 
 export default InputData;
