@@ -5,7 +5,6 @@ import Layout from "./component/Header/Layout";
 import About from "./component/Pages/About";
 import Home from "./component/Pages/Home";
 import MapPage from "./component/Pages/Map";
-import Work from "./component/Pages/Work";
 import Group from "./component/Group/Group";
 import NotFound from "./component/Pages/NotFound";
 import Register from "./component/Auth/Register";
@@ -46,7 +45,6 @@ class App extends React.Component{
                         <Route path="/about" component={About}/>
                         <Route path="/login" component={Signin} />
                         <Route path="/signup" component={Register}/>
-                        <Route path="/work" component={Work}/>
                         <Route path="/map" component={MapPage}/>
                         <Route path="/data" component={DataPage}/>
                         <PrivateRoute path="/group" component={Group}/>
