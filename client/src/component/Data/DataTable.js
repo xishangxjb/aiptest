@@ -6,60 +6,63 @@ import ConfirmDelete from './ConfirmDelete';
 
 class DataTable extends Component {
 
-  render() {
+    render() {
 
-    let users = this.props.users;
+        let coords = this.props.datas;
+        coords = coords.map((coord) =>
+            <Table.Row key={coord._id}>
+                <Table.Cell>{coord.AirSpaceClass}</Table.Cell>
+                <Table.Cell>{coord.From_City}</Table.Cell>
+                <Table.Cell>{coord.To_City}</Table.Cell>
+                <Table.Cell>{coord.Price}</Table.Cell>
+                <Table.Cell>{coord.AircraftModel}</Table.Cell>
+                <Table.Cell>{coord.EngineModel}</Table.Cell>
+                <Table.Cell>
+                    <InputData
+                        headerTitle='Edit Data'
+                        buttonTriggerTitle='Edit'
+                        buttonSubmitTitle='Save'
+                        buttonColor='blue'
+                        dataID={coord._id}
+                        onDataUpdated={this.props.onDataUpdated}
+                        server={this.props.server}
+                        socket={this.props.socket}
+                    />
+                    <ConfirmDelete
+                        headerTitle='Delete Data'
+                        buttonTriggerTitle='Delete'
+                        buttonColor='black'
+                        data={coord}
+                        onDataDeleted={this.props.onDataDeleted}
+                        server={this.props.server}
+                        socket={this.props.socket}
+                    />
+                </Table.Cell>
+            </Table.Row>
+        );
 
-    users = users.map((user) =>
-      <Table.Row key={user._id}>
-        <Table.Cell>{user.name}</Table.Cell>
-        <Table.Cell>{user.email}</Table.Cell>
-        <Table.Cell>{user.age}</Table.Cell>
-        <Table.Cell>{user.gender}</Table.Cell>
-        <Table.Cell>
-          <InputData
-            headerTitle='Edit User'
-            buttonTriggerTitle='Edit'
-            buttonSubmitTitle='Save'
-            buttonColor='blue'
-            userID={user._id}
-            onUserUpdated={this.props.onUserUpdated}
-            server={this.props.server}
-            socket={this.props.socket}
-          />
-          <ConfirmDelete
-            headerTitle='Delete User'
-            buttonTriggerTitle='Delete'
-            buttonColor='black'
-            user={user}
-            onUserDeleted={this.props.onUserDeleted}
-            server={this.props.server}
-            socket={this.props.socket}
-          />
-        </Table.Cell>
-      </Table.Row>
-    );
+        // Make every new data appear on top of the list
+        coords =  [...coords].reverse();
 
-    // Make every new user appear on top of the list
-    users =  [...users].reverse();
-
-    return (
-      <Table singleLine>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Email</Table.HeaderCell>
-            <Table.HeaderCell>Age</Table.HeaderCell>
-            <Table.HeaderCell>Gender</Table.HeaderCell>
-            <Table.HeaderCell>Actions</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {users}
-        </Table.Body>
-      </Table>
-    );
-  }
+        return (
+            <Table singleLine>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>AirSpaceClass</Table.HeaderCell>
+                        <Table.HeaderCell>From_City</Table.HeaderCell>
+                        <Table.HeaderCell>To_City</Table.HeaderCell>
+                        <Table.HeaderCell>Price</Table.HeaderCell>
+                        <Table.HeaderCell>AircraftModel</Table.HeaderCell>
+                        <Table.HeaderCell>EngineModel</Table.HeaderCell>
+                        <Table.HeaderCell>Actions</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    {coords}
+                </Table.Body>
+            </Table>
+        );
+    }
 }
 
 export default DataTable;
