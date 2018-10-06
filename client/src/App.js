@@ -1,5 +1,4 @@
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css';
 import {BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
 import Layout from "./component/Header/Layout";
 import About from "./component/Pages/About";
@@ -11,6 +10,8 @@ import Register from "./component/Auth/Register";
 import Signin from "./component/Auth/Signin";
 import fakeAuth from "./component/Auth/fakeAuth";
 import DataPage from "./component/Data/Data";
+
+import './App.css';
 
 
 
