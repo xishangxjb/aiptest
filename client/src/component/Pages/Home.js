@@ -12,6 +12,14 @@ import {
 } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import React from "react";
+
+
+
+
+
+function handleTest(){
+    window.location="/data";
+}
 /*
 * Heads up! HomepageHeading uses inline styling
 * */
@@ -45,7 +53,7 @@ const HomepageHeading = ({ mobile }) => (
             marginTop: mobile ? "0.5em" : "1.5em"
           }}
         />
-        <Button primary size="huge">
+        <Button  onClick={handleTest} primary size="huge">
           Get Started
           <Icon name="right arrow" />
         </Button>
