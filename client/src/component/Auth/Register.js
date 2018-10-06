@@ -13,7 +13,7 @@ const Style = {
   margin: '20px',
 }
 
-//
+// schema of signup information judgement using joi (valid email, password longer than 5, require firstname and lastname)
 const schema = {
     email: Joi.string()
         .required()

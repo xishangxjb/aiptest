@@ -21,6 +21,7 @@ class LoginPage extends React.Component{
       signInError:'',
       signInEmail:'',
       signInPassword:'',
+        formClassName:''
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -93,6 +94,7 @@ class LoginPage extends React.Component{
           this.setState({
             signInError: json.message,
             isLoading:false,
+              formClassName:"success",
             //input box empty
             signInEmail:'',
             signInPassword:'',
@@ -101,6 +103,7 @@ class LoginPage extends React.Component{
         }else{
           this.setState({
             signInError: json.message,
+              formClassName: "warning",
             isLoading: false
           });
         }
@@ -113,7 +116,8 @@ class LoginPage extends React.Component{
       token,
       signInError,
       signInEmail,
-      signInPassword
+      signInPassword,
+        formClassName
     } = this.state;
 
     const { from } = this.props.location.state || { from: { pathname: "/" } }
@@ -126,18 +130,13 @@ class LoginPage extends React.Component{
     if (!token) {
       return(
         <div style={Style}>
-          {
-            (signInError)?(
-              <p>{signInError}</p>
-            ):(null)
-          }
           <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
               {/*<Header as='h1' color='blue' textAlign='center' size='massive'>*/}
               {/*<Image src='./logo2.jpg' fluid/> Login*/}
               {/*</Header>*/}
               <Image src='./logo2.jpg' size='small' verticalAlign='middle'/>
-              <Form size='large'>
+              <Form className={formClassName} size='large'>
                 <Segment stacked>
                   <Form.Input
                     fluid icon='user'
@@ -165,12 +164,25 @@ class LoginPage extends React.Component{
                   <Button secondary animated='fade' fluid>
                     <Button.Content visible>Sign-up for a account</Button.Content>
                     <Button.Content hidden>free</Button.Content>
-                  </Button>
+                      </Button>
                 </Segment>
+                  <Message
+                      warning
+                      color='yellow'
+                      header='Woah!'
+                      content={signInError}
+                  />
+                  <Message
+                      success
+                      color='green'
+                      header='Nice one!'
+                      content={signInError}
+                  />
               </Form>
               <Message>
                 forgot passwords? <a href='#'>Reset password</a>
               </Message>
+
             </Grid.Column>
           </Grid>
         </div>
