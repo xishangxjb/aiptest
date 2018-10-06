@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom"
 import Layout from "./component/Header/Layout";
 import About from "./component/Pages/About";
 import Home from "./component/Pages/Home";
-import MapPage from "./component/Pages/Map";
+import MapPage from "./component/Map/Map";
 import Group from "./component/Group/Group";
 import NotFound from "./component/Pages/NotFound";
 import Register from "./component/Auth/Register";

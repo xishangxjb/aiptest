@@ -13,7 +13,7 @@ import LineString from 'ol/geom/LineString.js';
 import {Stroke, Style} from 'ol/style.js';
 import VectorSource from 'ol/source/Vector.js';
 import Feature from 'ol/Feature.js';
-import flightJson from './flights.json';
+import flightJson from '../Pages/flights.json';
 
 var styles = [
   'Road',
