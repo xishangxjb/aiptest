@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {getFromStorage} from "../../utils/storage";
+import React, { Component } from "react";
+import { getFromStorage } from "../../utils/storage";
 import fakeAuth from "../Auth/fakeAuth";
 import withRouter from "react-router/es/withRouter";
 
@@ -7,42 +7,42 @@ class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading:true,
-      token:'',
+      isLoading: true,
+      token: ""
     };
 
     this.logout = this.logout.bind(this);
   }
 
-  logout(){
+  logout() {
     this.setState({
-      isLoading:true
+      isLoading: true
     });
 
-    const object = getFromStorage('the_main_app');
-    if(object && object.token){
-      const {token} = object;
+    const object = getFromStorage("the_main_app");
+    if (object && object.token) {
+      const { token } = object;
       //verify token
-      fetch('/api/account/logout?token='+token)
+      fetch("/api/account/logout?token=" + token)
         .then(res => res.json())
-        .then(json =>{
-          if(json.success){
+        .then(json => {
+          if (json.success) {
             window.localStorage.removeItem("the_main_app");
             fakeAuth.signout();
             this.setState({
               //clear token
-              token:'',
+              token: "",
               isLoading: false
             });
-          }else{
+          } else {
             this.setState({
-              isLoading:false,
+              isLoading: false
             });
           }
         });
-    }else{
+    } else {
       this.setState({
-        isLoading: false,
+        isLoading: false
       });
     }
   }
@@ -66,9 +66,7 @@ class About extends Component {
         )
     );
 
-    return(
-      <AuthButton />
-    );
+    return <AuthButton />;
   }
 }
 

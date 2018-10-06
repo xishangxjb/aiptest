@@ -1,30 +1,27 @@
 //get the storage
-export function getFromStorage(key){
-  if(!key){
+export function getFromStorage(key) {
+  if (!key) {
     return null;
   }
 
-  try{
+  try {
     const valueString = localStorage.getItem(key);
-    if(valueString){
+    if (valueString) {
       return JSON.parse(valueString);
     }
-  }catch(err){
+  } catch (err) {
     return null;
   }
 }
 //set the item
 export function setInStorage(key, object) {
-  if(!key) {
-    console.error('Error:key is missing');
+  if (!key) {
+    console.error("Error:key is missing");
   }
 
-  try{
-    localStorage.setItem(key,JSON.stringify(object));
-  }catch(err){
+  try {
+    localStorage.setItem(key, JSON.stringify(object));
+  } catch (err) {
     console.error(err);
   }
-
-
 }
-

@@ -1,21 +1,21 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const UserSchema = new mongoose.Schema({
-  firstName:{
+  firstName: {
     type: String,
-    default:''
+    default: ""
   },
-  lastName:{
+  lastName: {
     type: String,
-    default:''
+    default: ""
   },
   email: {
     type: String,
-    default: ''
+    default: ""
   },
   password: {
     type: String,
-    default: ''
+    default: ""
   },
   isDeleted: {
     type: Boolean,
@@ -32,4 +32,4 @@ UserSchema.methods.generateHash = function(password) {
 UserSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);

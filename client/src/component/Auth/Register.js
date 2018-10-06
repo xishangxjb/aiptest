@@ -84,6 +84,7 @@ class SignUpPage extends React.Component{
       });
     }
   }
+   //validate the email,password, firstname and lastname
     validate = () => {
         const data={email:this.state.signUpEmail,
             passWord:this.state.signUpPassword,
@@ -193,72 +194,35 @@ class SignUpPage extends React.Component{
     }
 
     if (!token) {
-      return(
-        <div style={Style}>
-          <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-            <Grid.Column  style={{ maxWidth: 450 }}>
-              <Image src='./logo2.jpg' size='small' verticalAlign='middle'/>
-              <Form  className={formClassName} size='large'>
-                <Segment textAlign='left' stacked>
+      return <div style={Style}>
+          <Grid textAlign="center" style={{ height: "100%" }} verticalAlign="middle">
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Image src="./logo2.jpg" size="small" verticalAlign="middle" />
+              <Form className={formClassName} size="large">
+                <Segment textAlign="left" stacked>
                   <Form.Field>
-                    <Form.Input icon='user'
-                                iconPosition='left'
-                                label='Email address'
-                                placeholder='Email address'
-                                type='email'
-                                value={signUpEmail}
-                                onChange={this.handleEmailChange}
-                    />
-                    <Form.Input
-                      fluid icon='lock'
-                      iconPosition='left'
-                      label='Password'
-                      placeholder='Password'
-                      type='password'
-                      value={signUpPassword}
-                      onChange={this.handlePasswordChange}
-                    />
+                    <Form.Input icon="user" iconPosition="left" label="Email address" placeholder="Email address" type="email" value={signUpEmail} onChange={this.handleEmailChange} />
+                    <Form.Input fluid icon="lock" iconPosition="left" label="Password" placeholder="Password" type="password" value={signUpPassword} onChange={this.handlePasswordChange} />
                   </Form.Field>
-                  <Form.Group widths='equal'>
-                    <Form.Input
-                      type='name'
-                      label='First name'
-                      placeholder='First name'
-                      value={signUpFirstName}
-                      onChange={this.handleFirstNameChange}
-                    />
-                    <Form.Input
-                      type='name'
-                      label='Last name'
-                      placeholder='Last name'
-                      value={signUpLastName}
-                      onChange={this.handleLastNameChange} />
+                  <Form.Group widths="equal">
+                    <Form.Input type="name" label="First name" placeholder="First name" value={signUpFirstName} onChange={this.handleFirstNameChange} />
+                    <Form.Input type="name" label="Last name" placeholder="Last name" value={signUpLastName} onChange={this.handleLastNameChange} />
                   </Form.Group>
                   <Form.Field>
-                    <Form.Input label='Address' placeholder='Address' />
-                    <Form.Input icon='mobile alternate' iconPosition='left' label='Phone' placeholder='Phone' />
+                    <Form.Input label="Address" placeholder="Address" />
+                    <Form.Input icon="mobile alternate" iconPosition="left" label="Phone" placeholder="Phone" />
                   </Form.Field>
-                  <Form.Checkbox label='I agree to the Terms and Conditions' />
-                  <Button onClick={this.onSignUp} primary>SignUp</Button>
+                  <Form.Checkbox label="I agree to the Terms and Conditions" />
+                  <Button onClick={this.onSignUp} primary>
+                    SignUp
+                  </Button>
                 </Segment>
-                  <Message
-                      warning
-                      color='yellow'
-                      header='Woah!'
-                      content={str}
-                  />
-                  <Message
-                      success
-                      color='green'
-                      header='Nice one!'
-                      content={signUpError}
-                  />
+                <Message warning color="yellow" header="Woah!" content={str} />
+                <Message success color="green" header="Nice one!" content={signUpError} />
               </Form>
-
             </Grid.Column>
           </Grid>
-        </div>
-      );
+        </div>;
     }
 
 

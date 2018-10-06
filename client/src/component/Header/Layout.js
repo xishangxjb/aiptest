@@ -1,12 +1,12 @@
-import React from "react"
+import React from "react";
 import MobileContainer from "./MobileContainer";
 import DesktopContainer from "./Navbar";
 import PropTypes from "prop-types";
 import Footer from "../Footer/Footer";
 
-class Layout extends React.Component{
-  render(){
-    return(
+class Layout extends React.Component {
+  render() {
+    return (
       <div>
         <DesktopContainer>{this.props.children}</DesktopContainer>
         <MobileContainer>{this.props.children}</MobileContainer>
@@ -17,7 +17,7 @@ class Layout extends React.Component{
 }
 
 Layout.propTypes = {
-  children: PropTypes.node,
-}
+  children: PropTypes.node
+};
 
 export default Layout;

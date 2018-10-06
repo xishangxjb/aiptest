@@ -1,30 +1,30 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const AirlineSchema = new mongoose.Schema({
   AirSpaceClass: {
     type: String,
-    default:''
+    default: ""
   },
   From_City: {
     type: String,
-    default:''
+    default: ""
   },
   To_City: {
     type: String,
-    default:''
+    default: ""
   },
   Price: {
     type: Number,
-    default: 0.00
+    default: 0.0
   },
   AircraftModel: {
     type: String,
-    default:''
+    default: ""
   },
   EngineModel: {
     type: String,
-    default:''
+    default: ""
   }
 });
 
-module.exports = mongoose.model('Airline', AirlineSchema);
+module.exports = mongoose.model("Airline", AirlineSchema);
