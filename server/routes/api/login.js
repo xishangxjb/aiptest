@@ -10,13 +10,20 @@ module.exports = (app) => {
     const {
       firstName,
       lastName,
-      password
+      password,
+        errors
     } = body;
 
     let {
       email
     } = body;
 
+    if(errors){
+      return res.send({
+          success:false,
+          message:'Error:invalid login.'
+      });
+    }
     if (!firstName) {
       return res.send({
         success: false,
