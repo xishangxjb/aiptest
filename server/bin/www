@@ -95,7 +95,7 @@ function onListening() {
 
 
 // Set up socket.io
-const io = socket(server);
+const io = socket.listen(server);
 let online = 0;
 
 io.on('connection', (socket) => {
