@@ -7,6 +7,7 @@
     "@okta/okta-signin-widget": "^2.11.0",
     "arc": "^0.1.1",
     "axios": "^0.18.0",
+    "joi-browser": "^13.4.0",
     "ol": "^5.2.0",
     "openlayers": "^4.6.5",
     "prop-types": "^15.6.2",

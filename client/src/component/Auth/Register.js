@@ -1,5 +1,6 @@
 import React from 'react'
-import {Button, Form, Grid, Image, Segment} from 'semantic-ui-react'
+import {Button, Form, Grid, Image, Message, Segment} from 'semantic-ui-react'
+import Joi from 'joi-browser'
 
 
 import {
@@ -12,18 +13,43 @@ const Style = {
   margin: '20px',
 }
 
+//
+const schema = {
+    email: Joi.string()
+        .required()
+        .email()
+        .label("Username"),
+    passWord: Joi.string()
+        .required()
+        .min(5)
+        .label("Password"),
+    firstName: Joi.string()
+        .required()
+        .label("Firstname"),
+    lastName:Joi.string()
+        .required()
+        .label("Lastname")
+    // phone: Joi.string()
+    //     .regex(/^([+]?|[0-9]{3,4}-)[0-9][9,11]/)
+    //     .required()
+    //     .label("Phone number")
+};
+
 class SignUpPage extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      signUpFirstName:'',
-      signUpLastName:'',
-      signUpEmail:'',
-      signUpPassword:'',
-      signUpError:'',
-      isLoading:true,
-      token:'',
+        signUpFirstName: '',
+        signUpLastName: '',
+        signUpEmail: '',
+        signUpPassword: '',
+        signUpError: '',
+        isLoading: true,
+        token: '',
+        errors: {},
+        formClassName:''
     };
+
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
@@ -58,7 +84,19 @@ class SignUpPage extends React.Component{
       });
     }
   }
-
+    validate = () => {
+        const data={email:this.state.signUpEmail,
+            passWord:this.state.signUpPassword,
+            firstName:this.state.signUpFirstName,
+            lastName:this.state.signUpLastName
+        };
+        const result = Joi.validate(data, schema, {abortEarly:false});
+        if (!result.error) return null;
+        const errors={};
+        for (let item of result.error.details)
+            errors[item.path[0]]=item.message;
+        return errors;
+    };
   //onchage of firstName
   handleFirstNameChange(e){
     this.setState({signUpFirstName:e.target.value})
@@ -82,12 +120,14 @@ class SignUpPage extends React.Component{
       signUpFirstName,
       signUpLastName,
       signUpEmail,
-      signUpPassword
+      signUpPassword,
     } = this.state;
 
     this.setState({
       isLoading:true
     });
+
+    console.log(this.validate());
 
     //Post request to backend
     fetch('/api/account/signup',{
@@ -99,7 +139,8 @@ class SignUpPage extends React.Component{
         firstName: signUpFirstName,
         lastName: signUpLastName,
         email: signUpEmail,
-        password: signUpPassword
+        password: signUpPassword,
+          errors:this.validate()
       }),
 
     }).then(res => res.json())
@@ -107,6 +148,7 @@ class SignUpPage extends React.Component{
         if(json.success){
           this.setState({
             signUpError: json.message,
+            formClassName:"success",
             isLoading:false,
             //input box empty
             signUpEmail:'',
@@ -116,7 +158,9 @@ class SignUpPage extends React.Component{
           });
         }else{
           this.setState({
-            signUpError: json.message,
+            // signUpError: json.message,
+              errors:this.validate(),
+              formClassName: "warning",
             isLoading: false
           });
         }
@@ -132,8 +176,17 @@ class SignUpPage extends React.Component{
       signUpFirstName,
       signUpLastName,
       signUpEmail,
-      signUpPassword
+      signUpPassword,
+        errors,
+      formClassName
     } = this.state;
+
+    var str='';
+    const err = Object.values(errors);
+    for (var i =0; i<err.length;i++){
+        str =  str + err[i]+"\n"
+    }
+    console.log(str);
 
     if (isLoading){
       return(<div><p>Loading.....</p></div>);
@@ -142,15 +195,10 @@ class SignUpPage extends React.Component{
     if (!token) {
       return(
         <div style={Style}>
-          {
-            (signUpError)?(
-              <p>{signUpError}</p>
-            ):(null)
-          }
           <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
             <Grid.Column  style={{ maxWidth: 450 }}>
               <Image src='./logo2.jpg' size='small' verticalAlign='middle'/>
-              <Form  size='large'>
+              <Form  className={formClassName} size='large'>
                 <Segment textAlign='left' stacked>
                   <Form.Field>
                     <Form.Input icon='user'
@@ -193,7 +241,20 @@ class SignUpPage extends React.Component{
                   <Form.Checkbox label='I agree to the Terms and Conditions' />
                   <Button onClick={this.onSignUp} primary>SignUp</Button>
                 </Segment>
+                  <Message
+                      warning
+                      color='yellow'
+                      header='Woah!'
+                      content={str}
+                  />
+                  <Message
+                      success
+                      color='green'
+                      header='Nice one!'
+                      content={signUpError}
+                  />
               </Form>
+
             </Grid.Column>
           </Grid>
         </div>
