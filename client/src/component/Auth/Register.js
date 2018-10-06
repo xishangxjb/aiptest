@@ -91,7 +91,7 @@ class SignUpPage extends React.Component{
             firstName:this.state.signUpFirstName,
             lastName:this.state.signUpLastName
         };
-        const result = Joi.validate(data, schema, {abortEarly:false});
+        const result = Joi.validate(data, schema);
         if (!result.error) return null;
         const errors={};
         for (let item of result.error.details)
@@ -182,12 +182,15 @@ class SignUpPage extends React.Component{
       formClassName
     } = this.state;
 
-    var str='';
-    const err = Object.values(errors);
-    for (var i =0; i<err.length;i++){
-        str =  str + err[i]+"\n"
-    }
-    console.log(str);
+    // var str='';
+    const err = Object.values(errors);  // extract error from error object
+    // for (var i =0; i<err.length;i++){
+    //     str =  `${str}
+    //
+    //     ${err[i]}
+    //     `
+    // }
+    // console.log(str);
 
     if (isLoading){
       return(<div><p>Loading.....</p></div>);
@@ -217,7 +220,7 @@ class SignUpPage extends React.Component{
                     SignUp
                   </Button>
                 </Segment>
-                <Message warning color="yellow" header="Woah!" content={str} />
+                <Message warning color="yellow" header="Woah!" content={err} />
                 <Message success color="green" header="Nice one!" content={signUpError} />
               </Form>
             </Grid.Column>
