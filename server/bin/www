@@ -9,7 +9,7 @@ var debug = require('debug')('server:server');
 var http = require('http');
 
 //import socket
-const socket = require('socket.io');
+const   socket = require('socket.io');
 
 /**
  * Get port from environment and store in Express.

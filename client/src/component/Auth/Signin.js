@@ -27,7 +27,8 @@ class LoginPage extends React.Component {
       signInError: "",
       signInEmail: "",
       signInPassword: "",
-      formClassName: ""
+      formClassName: "",
+        isMounted: ""
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -36,6 +37,7 @@ class LoginPage extends React.Component {
   }
 
   componentDidMount() {
+      this.state.isMounted=true;
     const object = getFromStorage("the_main_app");
     if (object && object.token) {
       const { token } = object;
@@ -44,23 +46,28 @@ class LoginPage extends React.Component {
         .then(res => res.json())
         .then(json => {
           if (json.success) {
+              if (this.state.isMounted ==true){
             this.setState({
               token,
               isLoading: false
-            });
+            })};
           } else {
+              if (this.state.isMounted == true){
             this.setState({
               isLoading: false
-            });
+            });}
           }
         });
     } else {
+        if (this.state.isMounted == true){
       this.setState({
         isLoading: false
-      });
+      })};
     }
   }
-
+componentWillUnmount(){
+      this.state.isMounted=false
+}
   //onChange of email
   handleEmailChange(e) {
     this.setState({ signInEmail: e.target.value });
